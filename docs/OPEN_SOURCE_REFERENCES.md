@@ -6,7 +6,7 @@
 - 与“音频图谱/可视化/音频处理”最直接相关的优先推荐：
   1. **katspaugh/wavesurfer.js**（波形可视化，Web 可直接嵌入）
   2. **librosa/librosa**（频谱/特征提取，适合离线分析流水线）
-  3. **FFmpeg/FFmpeg**（音视频解复用/转码/抽音频，适合作为底层处理链）
+  3. **FFmpeg/FFmpeg**（音视频解复用、转码与抽音频，适合作为底层处理链）
 - 建议先在 `audio-graph` 中定义最小可行流程：`FFmpeg` 预处理音频 + `librosa` 生成特征 + `wavesurfer.js`（或前端可视化层）展示。
 
 ## 仓库现状检查（已查看路径）
