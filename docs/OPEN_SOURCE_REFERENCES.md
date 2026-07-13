@@ -11,13 +11,13 @@
 
 ## 仓库现状检查（已查看路径）
 
-- `/home/runner/work/audio-graph/audio-graph/README.md`
+- `README.md`
 - 通过依赖文件模式扫描未命中：
-  - `/home/runner/work/audio-graph/audio-graph/**/package.json`
-  - `/home/runner/work/audio-graph/audio-graph/**/go.mod`
-  - `/home/runner/work/audio-graph/audio-graph/**/pyproject.toml`
-  - `/home/runner/work/audio-graph/audio-graph/**/Cargo.toml`
-  - `/home/runner/work/audio-graph/audio-graph/**/requirements.txt`
+  - `**/package.json`
+  - `**/go.mod`
+  - `**/pyproject.toml`
+  - `**/Cargo.toml`
+  - `**/requirements.txt`
 
 ---
 
