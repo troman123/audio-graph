@@ -40,7 +40,7 @@
 | 项目名 | GitHub 链接（permalink） | 用途（1-2 行） | 适合场景 / 与 audio-graph 集成方式 | 主要语言 & 许可证 | 安装/集成提示 |
 |---|---|---|---|---|---|
 | librosa | https://github.com/librosa/librosa | 音乐与音频分析库，包含 STFT、Mel、节拍、色度等。 | **与仓库相关**：可直接生成音频图谱核心特征（谱图、节奏、段落）。 | Python；ISC | Python API 成熟，适合离线特征提取与实验迭代。 |
-| FFmpeg | https://github.com/FFmpeg/FFmpeg | 音视频编解码与处理基础设施。 | **与仓库相关**：作为输入标准化层，统一采样率、分离音轨、切片。 | C；LGPL-2.1+ 或 GPL-2.0+（取决于构建配置） | 提供 CLI 与可链接库（libav*），适合 CI 与生产流水线。 |
+| FFmpeg | https://github.com/FFmpeg/FFmpeg | 音视频编解码与处理基础设施。 | **与仓库相关**：作为输入标准化层，统一采样率、分离音轨、切片。 | C；LGPL-2.1+ 或 GPL-2.0+ (取决于构建配置) | 提供 CLI 与可链接库（libav*）；适合 CI 与生产流水线。 |
 | wavesurfer.js | https://github.com/katspaugh/wavesurfer.js | Web 端音频波形播放器与可视化库。 | **与仓库相关**：前端可直接展示波形、标注区间、交互定位。 | TypeScript；BSD-3-Clause | 浏览器可嵌入；插件机制支持 Regions、Timeline、Spectrogram。 |
 | basic-pitch | https://github.com/spotify/basic-pitch | 音频转 MIDI（含 pitch bend）模型。 | **与仓库相关**：可把音频图进一步结构化为音符/旋律事件图。 | Python；Apache-2.0 | 提供 Python/TFJS 路线，适合服务端批处理或前端推理。 |
 | Essentia | https://github.com/MTG/essentia | 音乐信息检索（MIR）库，覆盖描述符分析与合成。 | **与仓库相关**：适合高维音频特征工程（情感、音色、节奏）扩展。 | C++；AGPL-3.0 | C++ 核心 + Python 绑定；可作高性能分析后端（注意 AGPL 合规要求）。 |
