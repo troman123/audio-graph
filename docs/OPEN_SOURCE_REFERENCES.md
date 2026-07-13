@@ -2,12 +2,13 @@
 
 ## 简短总结
 
-- 当前仓库（`troman123/audio-graph`）在 `main` 分支下内容非常精简：仅发现 `README.md`（标题为 `audio-graph`），未发现依赖清单（如 `package.json`、`pyproject.toml`、`requirements.txt`、`go.mod`、`Cargo.toml`）或代码目录；因此暂未看到图片/短剧方向的现有实现线索。
+- 当前仓库在 `main` 分支下内容非常精简：仅发现 `README.md`（标题为 `audio-graph`），未发现依赖清单（如 `package.json`、`pyproject.toml`、`requirements.txt`、`go.mod`、`Cargo.toml`）或代码目录；因此暂未看到图片/短剧方向的现有实现线索。
 - 与“音频图谱/可视化/音频处理”最直接相关的优先推荐：
   1. **katspaugh/wavesurfer.js**（波形可视化，Web 可直接嵌入）
   2. **librosa/librosa**（频谱/特征提取，适合离线分析流水线）
   3. **FFmpeg/FFmpeg**（音视频解复用、转码与抽音频，适合作为底层处理链）
 - 建议先在 `audio-graph` 中定义最小可行流程：`FFmpeg` 预处理音频 + `librosa` 生成特征 + `wavesurfer.js`（或前端可视化层）展示。
+- 许可证合规提醒：本文包含 AGPL-3.0 与 Unlicense 项目。AGPL-3.0 在网络服务分发场景下有源码开放义务；Unlicense 在部分法域/企业合规策略中可能需要额外法务确认。
 
 ## 仓库现状检查（已查看路径）
 
@@ -28,9 +29,9 @@
 | OpenCV | https://github.com/opencv/opencv | 经典计算机视觉与图像处理库，覆盖检测、几何变换、滤波、跟踪等。 | 可为音频图增加“封面图/视频帧”分析能力，如镜头关键帧提取后与音频事件对齐。 | C++；Apache-2.0 | 提供 C++ 核心与多语言绑定；可作为本地库嵌入，也可命令行工具链集成。 |
 | Pillow | https://github.com/python-pillow/Pillow | Python 图像读写与基础处理事实标准库。 | 适合生成音频可视化导出图（缩略图、贴图、标注层）。 | Python；HPND | 轻量、API 稳定，适合脚本化处理与批量任务。 |
 | scikit-image | https://github.com/scikit-image/scikit-image | 科学计算导向的图像处理库，算法模块丰富。 | 可做谱图后处理（边缘、分割、形态学）辅助音频图特征增强。 | Python；BSD-3-Clause | 与 NumPy/SciPy 生态兼容，适合研究型与离线流水线。 |
-| Ultralytics YOLO | https://github.com/ultralytics/ultralytics | 目标检测/分割/跟踪框架，工程化程度高。 | 用于视频画面语义理解，和音频节拍/事件做多模态时间对齐。 | Python；AGPL-3.0 | 提供 Python API 与 CLI；推理可独立为服务。 |
+| Ultralytics YOLO | https://github.com/ultralytics/ultralytics | 目标检测/分割/跟踪框架，工程化程度高。 | 用于视频画面语义理解，和音频节拍/事件做多模态时间对齐。 | Python；AGPL-3.0 | 提供 Python API 与 CLI；推理可独立为服务（注意 AGPL 合规要求）。 |
 | Diffusers | https://github.com/huggingface/diffusers | 扩散模型框架，支持图像/视频/音频生成。 | 可用于“音频驱动视觉素材”或封面生成（与音频特征联动）。 | Python；Apache-2.0 | Python API 完整，可与 Hugging Face 模型生态直接结合。 |
-| Immich | https://github.com/immich-app/immich | 高性能自托管照片/视频管理系统。 | 可作为媒体资产层，管理音频图项目产生的封面图、短视频素材。 | TypeScript；AGPL-3.0 | 提供 Web/移动端与服务端架构，适合集成媒体管理工作流。 |
+| Immich | https://github.com/immich-app/immich | 高性能自托管照片/视频管理系统。 | 可作为媒体资产层，管理音频图项目产生的封面图、短视频素材。 | TypeScript；AGPL-3.0 | 提供 Web/移动端与服务端架构，适合集成媒体管理工作流（注意 AGPL 合规要求）。 |
 
 ---
 
@@ -42,7 +43,7 @@
 | FFmpeg | https://github.com/FFmpeg/FFmpeg | 音视频编解码与处理基础设施。 | **与仓库相关**：作为输入标准化层，统一采样率、分离音轨、切片。 | C；LGPL-2.1+ 或 GPL-2.0+（取决于构建配置） | 提供 CLI 与可链接库（libav*），适合 CI 与生产流水线。 |
 | wavesurfer.js | https://github.com/katspaugh/wavesurfer.js | Web 端音频波形播放器与可视化库。 | **与仓库相关**：前端可直接展示波形、标注区间、交互定位。 | TypeScript；BSD-3-Clause | 浏览器可嵌入；插件机制支持 Regions、Timeline、Spectrogram。 |
 | basic-pitch | https://github.com/spotify/basic-pitch | 音频转 MIDI（含 pitch bend）模型。 | **与仓库相关**：可把音频图进一步结构化为音符/旋律事件图。 | Python；Apache-2.0 | 提供 Python/TFJS 路线，适合服务端批处理或前端推理。 |
-| Essentia | https://github.com/MTG/essentia | 音乐信息检索（MIR）库，覆盖描述符分析与合成。 | **与仓库相关**：适合高维音频特征工程（情感、音色、节奏）扩展。 | C++；AGPL-3.0 | C++ 核心 + Python 绑定；可作高性能分析后端。 |
+| Essentia | https://github.com/MTG/essentia | 音乐信息检索（MIR）库，覆盖描述符分析与合成。 | **与仓库相关**：适合高维音频特征工程（情感、音色、节奏）扩展。 | C++；AGPL-3.0 | C++ 核心 + Python 绑定；可作高性能分析后端（注意 AGPL 合规要求）。 |
 | JUCE | https://github.com/juce-framework/JUCE | 跨平台音频应用/插件框架。 | 若 audio-graph 未来做桌面实时可视化或插件化，可作为 GUI+DSP 基础。 | C++；GPL-3.0 或 Commercial | 支持 VST/AU/AAX/LV2，适合音频工具产品化。 |
 
 ---
@@ -56,7 +57,7 @@
 | Shotcut | https://github.com/mltframework/shotcut | 开源跨平台视频编辑器。 | 可作为“自动粗剪 + 人工精修”链路中的后期编辑工具。 | C++；GPL-3.0 | GUI 工作流成熟，便于非开发者参与内容生产。 |
 | OpenShot | https://github.com/OpenShot/openshot-qt | 开源视频编辑器（时间线、转场、标题）。 | 可承接音频图输出的节奏点，快速生成带字幕/转场的短视频。 | Python；GPL-3.0+ | 可结合其库与桌面编辑器能力做半自动流程。 |
 | OpenTimelineIO | https://github.com/AcademySoftwareFoundation/OpenTimelineIO | 编辑时间线交换格式与 API。 | **与仓库相关**：把 audio-graph 的分析结果导出为标准 timeline，接入 NLE。 | Python；Apache-2.0 | 提供可编程 API，适合跨工具互操作（Premiere/Resolve 管线对接）。 |
-| auto-editor | https://github.com/WyattBlue/auto-editor | 自动剪辑工具，按静音/节奏等规则裁剪素材。 | **与仓库相关**：可直接消费音频分析结果，做短剧/短视频自动粗剪。 | Nim；Unlicense | CLI 优先，便于在 CI 或批处理任务中自动化运行。 |
+| auto-editor | https://github.com/WyattBlue/auto-editor | 自动剪辑工具，按静音/节奏等规则裁剪素材。 | **与仓库相关**：可直接消费音频分析结果，做短剧/短视频自动粗剪。 | Nim；Unlicense | CLI 优先，便于在 CI 或批处理任务中自动化运行（企业合规场景建议先做法务确认）。 |
 
 ---
 
