@@ -8,7 +8,7 @@
   2. **librosa/librosa**（频谱/特征提取，适合离线分析流水线）
   3. **FFmpeg/FFmpeg**（音视频解复用、转码与抽音频，适合作为底层处理链）
 - 建议先在 `audio-graph` 中定义最小可行流程：`FFmpeg` 预处理音频 + `librosa` 生成特征 + `wavesurfer.js`（或前端可视化层）展示。
-- 许可证合规提醒：本文包含 AGPL-3.0 与 Unlicense 项目。AGPL-3.0 在网络服务分发场景下有源码开放义务；Unlicense 在部分法域/企业合规策略中可能需要额外法务确认。
+- 许可证合规提醒：本文包含 AGPL-3.0、GPL-2.0/GPL-3.0 与 Unlicense 项目。AGPL-3.0 在网络服务分发场景下有源码开放义务；GPL 系许可证在分发衍生作品时有 copyleft 约束；Unlicense 属于公共领域贡献声明，在不承认公共领域让渡的法域或严格企业合规策略下建议额外法务确认。
 
 ## 仓库现状检查（已查看路径）
 
@@ -57,7 +57,7 @@
 | Shotcut | https://github.com/mltframework/shotcut | 开源跨平台视频编辑器。 | 可作为“自动粗剪 + 人工精修”链路中的后期编辑工具。 | C++；GPL-3.0 | GUI 工作流成熟，便于非开发者参与内容生产。 |
 | OpenShot | https://github.com/OpenShot/openshot-qt | 开源视频编辑器（时间线、转场、标题）。 | 可承接音频图输出的节奏点，快速生成带字幕/转场的短视频。 | Python；GPL-3.0+ | 可结合其库与桌面编辑器能力做半自动流程。 |
 | OpenTimelineIO | https://github.com/AcademySoftwareFoundation/OpenTimelineIO | 编辑时间线交换格式与 API。 | **与仓库相关**：把 audio-graph 的分析结果导出为标准 timeline，接入 NLE。 | Python；Apache-2.0 | 提供可编程 API，适合跨工具互操作（Premiere/Resolve 管线对接）。 |
-| auto-editor | https://github.com/WyattBlue/auto-editor | 自动剪辑工具，按静音/节奏等规则裁剪素材。 | **与仓库相关**：可直接消费音频分析结果，做短剧/短视频自动粗剪。 | Nim；Unlicense | CLI 优先，便于在 CI 或批处理任务中自动化运行（企业合规场景建议先做法务确认）。 |
+| auto-editor | https://github.com/WyattBlue/auto-editor | 自动剪辑工具，按静音/节奏等规则裁剪素材。 | **与仓库相关**：可直接消费音频分析结果，做短剧/短视频自动粗剪。 | Nim；Unlicense | CLI 优先，便于在 CI 或批处理任务中自动化运行（Unlicense 为公共领域声明，企业合规场景建议先做法务确认）。 |
 
 ---
 
