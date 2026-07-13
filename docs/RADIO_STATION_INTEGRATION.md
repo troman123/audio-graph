@@ -86,29 +86,31 @@ func updateNowPlayingInfo(title: String, artist: String) {
 Icecast/Shoutcast 流会通过 ICY metadata 协议传递当前播放的曲目信息：
 
 ```swift
-// 监听 AVPlayerItem 的 timedMetadata
-NotificationCenter.default.addObserver(
-    forName: .AVPlayerItemNewAccessLogEntry,
-    object: playerItem,
-    queue: .main
-) { _ in
-    // 处理日志
-}
+import Combine
 
-// 通过 KVO 监听元数据
-playerItem.addObserver(self, forKeyPath: "timedMetadata", options: .new, context: nil)
-
-override func observeValue(forKeyPath keyPath: String?,
-                           of object: Any?,
-                           change: [NSKeyValueChangeKey: Any]?,
-                           context: UnsafeMutableRawPointer?) {
-    if keyPath == "timedMetadata",
-       let metadata = playerItem.timedMetadata {
-        for item in metadata {
-            if let title = item.stringValue {
-                print("当前播放: \(title)")
+class MetadataObserver {
+    private var cancellable: AnyCancellable?
+    
+    func observeMetadata(for playerItem: AVPlayerItem) {
+        // 使用 Combine 监听 timedMetadata 变化（推荐，iOS 13+）
+        cancellable = playerItem.publisher(for: \.timedMetadata)
+            .compactMap { $0 }
+            .sink { metadata in
+                for item in metadata {
+                    if let title = item.stringValue {
+                        print("当前播放: \(title)")
+                    }
+                }
             }
-        }
+    }
+    
+    func stopObserving() {
+        cancellable?.cancel()
+        cancellable = nil
+    }
+    
+    deinit {
+        stopObserving()
     }
 }
 ```
@@ -157,8 +159,8 @@ struct RadioStation: Codable {
 
 func searchStations(keyword: String) async throws -> [RadioStation] {
     let baseURL = "https://de1.api.radio-browser.info/json/stations/byname/"
-    guard let url = URL(string: baseURL + keyword.addingPercentEncoding(
-        withAllowedCharacters: .urlPathAllowed)!) else {
+    guard let encoded = keyword.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+          let url = URL(string: baseURL + encoded) else {
         throw URLError(.badURL)
     }
     let (data, _) = try await URLSession.shared.data(from: url)
@@ -200,7 +202,7 @@ func searchStations(keyword: String) async throws -> [RadioStation] {
 
 #### B. 广播组织权风险
 
-- 根据《中华人民共和国著作权法》第47条，广播电台享有广播组织权
+- 根据《中华人民共和国著作权法》（2020年修订版）第四十七条，广播电台享有广播组织权
 - 未经许可转播广播节目属于侵权行为
 - **影响**：即便只是"转播"而非"录制"，未经电台授权也可能侵权
 
